@@ -35,6 +35,14 @@ app.post('/paint', (req, res) => {
   res.json(req.body);
 });
 
+app.post('/pusher/auth', function(req, res) {
+    console.log(req.body.socket_id+" has been authenticated")
+    var socketId = req.body.socket_id;
+    var channel = req.body.channel_name;
+    var auth = pusher.authenticate(socketId, channel);
+    res.send(auth);
+  });
+
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
 });

@@ -5,6 +5,7 @@ import React, {
 import './App.css';
 import Canvas from './canvas';
 import { SwatchesPicker } from 'react-color';
+import Chat from './Components/chat/chat';
 class App extends Component {
     state = {
         color: "#0d47a1"
@@ -20,7 +21,7 @@ class App extends Component {
                 {
                     textAlign: 'center'
                 }
-            } > Dos Paint </h3> <div className = "main" >
+            } > Pictionary </h3> <div className = "main" >
             <div className = "color-guide" >
                 <h5 > Color Guide </h5> 
                 <div className = "user user" > User </div> 
@@ -30,7 +31,9 @@ class App extends Component {
                 onChangeComplete={ handleColorChange } />
             </div> 
             <Canvas color={this.state.color}/>
+            <Chat title='Pictionary' />
             </div> 
+            
         </Fragment>
         );
     }

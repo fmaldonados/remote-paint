@@ -17,8 +17,6 @@ class Canvas extends Component {
   }
   
   componentDidUpdate(prevProps) {
-    console.log(prevProps);
-    console.log(this.props.color);
     if (prevProps!==this.props.color) {
       this.userStrokeStyle=this.props.color;  
     }
