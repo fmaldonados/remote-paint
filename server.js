@@ -35,6 +35,11 @@ app.post('/paint', (req, res) => {
   res.json(req.body);
 });
 
+app.post('/message', (req, res) => {
+    pusher.trigger('message', 'text', req.body);
+    res.json(req.body);
+});
+
 app.post('/pusher/auth', function(req, res) {
     console.log(req.body.socket_id+" has been authenticated")
     var socketId = req.body.socket_id;
