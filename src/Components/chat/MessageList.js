@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom'; // for working with the DOM
-import TimeAgo from 'react-timeago'; // for displaying human-friendly time
+import ReactDOM from 'react-dom';
+import TimeAgo from 'react-timeago';
 
 class MessageList extends React.Component {
 

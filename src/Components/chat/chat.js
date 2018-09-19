@@ -5,21 +5,19 @@ import Pusher from 'pusher-js';
 import slugify from 'slugify';
 import randomAnimal from 'random-animal-name-generator';
 
-import MessageList from './MessageList'; // the component for listing messages
+import MessageList from './MessageList';
 import './style.css';
 
 class Chat extends React.Component {
 
   constructor(props) {
     super(props);
-    this.handleChange = this.handleChange.bind(this); // for updating the message being typed by the user
+    this.handleChange = this.handleChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.state = {
-      message: '', // the message being typed by the user
-      messages: [] // the messages that will be displayed by the MessageList component
+      message: '',
+      messages: []
     }
-
-    this.user = randomAnimal(); // generate random animal name
   }
 
   componentWillMount() {
@@ -35,9 +33,8 @@ class Chat extends React.Component {
   componentDidMount() {
     this.post_channel.bind('text', (message) => {
       console.log(message)
-      message.time = new Date(message.time); // convert to a date object since its converted to a string when sending the message
-      // update the state to include the new message
-      if(message.by !== this.user){
+      message.time = new Date(message.time);
+      if(message.by !== this.props.user){
         this.setState({
           messages: this.state.messages.concat(message)
         });
@@ -49,7 +46,6 @@ class Chat extends React.Component {
     return (
       <div className="chatbox">
         <div className="post-single">
-
           <div className="post-single__inner">
             <h1>CHAT</h1>
             <form onSubmit={this.onSubmit}>
@@ -77,7 +73,7 @@ class Chat extends React.Component {
     e.preventDefault();
     let text = this.state.message;
     let message = {
-      by: this.user,
+      by: this.props.user,
       body: text,
       time: new Date()
     };
@@ -91,7 +87,6 @@ class Chat extends React.Component {
       },
     });
 
-    // this.post_channel.trigger('client-on-message', message);
     this.setState({
       message: '',
       messages: this.state.messages.concat(message)
